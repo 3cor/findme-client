@@ -7,14 +7,9 @@ Developed by: Nitis Monburinon (2018)
 
 import epaper
 
-def hello():
-	ep = epaper.EPScreen('landscape')
-	#ep.set_title("To Jiw")
+def main():
+    ep = epaper.EPScreen('landscape')
+    ep.show("arigatou.bmp")
+    ep.update_screen()
 
-	# using the default font, each line can contain only 24 characters
-	#ep.add_text((0,25),"Boon is fat.")
-	#ep.add_text((0,50),"But Jiw is fatter.")
-	ep.print("Cats are similar in anatomy to the other felids, with a strong flexible body, quick reflexes, sharp retractable claws and teeth adapted to killing small prey. Cat senses fit a crepuscular and predatory ecological niche.",font="big")
-	ep.update_screen()
-
-hello()
+main()
