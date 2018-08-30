@@ -9,7 +9,9 @@ import epaper
 
 def main():
     ep = epaper.EPScreen('landscape')
-    ep.show("arigatou.bmp")
+    #ep.show("images/arigatou.bmp")
+    ep.show("images/iot_boys.bmp")
+    ep.print("IOT BOYS",font="big")
     ep.update_screen()
 
 main()

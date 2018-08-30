@@ -154,7 +154,7 @@ class EPScreen():
     def add_line(self, pos):
         """
         Add line
-        :param pos: Position xy start/end point
+        :param pos: Positiogin xy start/end point
         :return:
         """
 
