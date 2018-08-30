@@ -161,20 +161,7 @@ class EPScreen():
 
 		self.draw.line((pos[0], pos[1], pos[2], pos[3]), fill=BLACK)
 
-	def split_line(self, text):
-		
-		line_count = int(len(text)/self.max_char)
-		
-		indices = []
-	
-		for l in range(line_count):
-			indices.append(self.max_char*l)
-		indices.append(indices[-1] + len(text)%self.max_char)
-		
-		return [text[i:j]+"\n" for i,j in zip(indices, indices[1:]+[None])]
-
-
-	def print(self, text, pos=(0,0), font=FONT_NORMAL):
+	def print(self, text, pos=(0,0), font="big"):
 		"""
 		Print a line of text with automatic new line
 		:param text: Text to print
@@ -182,5 +169,13 @@ class EPScreen():
 		:return:
 		"""
 
-		string = "".join(self.split_line(text))
+		if font == "normal":
+			font, every = FONT_NORMAL, 24
+		elif font == "big":
+			font, every = FONT_BIG, 20
+
+		#string = "\n".join(self.split_line(text))
+		string = "\n".join(text[i:i+every] for i in range(0, len(text), every))
+
 		self.draw.text(pos, string, font=font, fill=BLACK)
+

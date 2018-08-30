@@ -14,7 +14,7 @@ def hello():
 	# using the default font, each line can contain only 24 characters
 	#ep.add_text((0,25),"Boon is fat.")
 	#ep.add_text((0,50),"But Jiw is fatter.")
-	ep.print("As I told you many times, you should be in the lab. And were supposed to meet me at nine every morning!")
+	ep.print("Cats are similar in anatomy to the other felids, with a strong flexible body, quick reflexes, sharp retractable claws and teeth adapted to killing small prey. Cat senses fit a crepuscular and predatory ecological niche.",font="big")
 	ep.update_screen()
 
 hello()
