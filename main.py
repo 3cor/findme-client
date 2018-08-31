@@ -10,8 +10,9 @@ import epaper
 def main():
     ep = epaper.EPScreen('landscape')
     #ep.show("images/arigatou.bmp")
-    ep.show("images/iot_boys.bmp")
-    ep.print("IOT BOYS",font="big")
+    #ep.show("images/iot_boys.bmp")
+    ep.print("E Ink (electronic ink) is a popular type of electronic paper display technology",font="big")
+    ep.print(",characterized by high visibility and contrast.",pos=(0,90),font="normal")
     ep.update_screen()
 
 main()

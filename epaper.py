@@ -22,7 +22,6 @@ WHITE = 255
 # Size (Portrait mode)
 DEVICE_WIDTH = 176
 DEVICE_HEIGHT = 264
-PORTRAIT_MAX_CHAR = 24
 
 
 class EPScreen():
@@ -160,6 +159,14 @@ class EPScreen():
 
         self.draw.line((pos[0], pos[1], pos[2], pos[3]), fill=BLACK)
 
+    def separate_line(self, text, max_char):
+        """
+        Split a long string to separate line, add new line character at the end.
+        :param text: Text to split by line
+        :return: New line separated string
+        """
+        return "\n".join(text[i:i+max_char].lstrip(' ') for i in range(0, len(text), max_char))
+
     def print(self, text, pos=(0, 0), font="big"):
         """
         Print a line of text with automatic new line
@@ -169,12 +176,12 @@ class EPScreen():
         """
 
         if font == "normal":
-            font, every = FONT_NORMAL, 24
+            font, max_char = FONT_NORMAL, 24
         elif font == "big":
-            font, every = FONT_BIG, 20
+            font, max_char = FONT_BIG, 20
 
-        #string = "\n".join(self.split_line(text))
-        string = "\n".join(text[i:i+every] for i in range(0, len(text), every))
+        #  (with maximum characters of max_char)
+        string = self.separate_line(text, max_char)
 
         self.draw.text(pos, string, font=font, fill=BLACK)
 
