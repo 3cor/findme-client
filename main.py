@@ -6,13 +6,16 @@ Developed by: Nitis Monburinon (2018)
 """
 
 import epaper
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("text", help="Text to show on the E-paper display.")
+args = parser.parse_args()
+text = args.text
 
 def main():
     ep = epaper.EPScreen('landscape')
-    #ep.show("images/arigatou.bmp")
-    #ep.show("images/iot_boys.bmp")
-    ep.print("E Ink (electronic ink) is a popular type of electronic paper display technology",font="big")
-    ep.print(",characterized by high visibility and contrast.",pos=(0,90),font="normal")
+    ep.print(text,type="big")
     ep.update_screen()
 
 main()

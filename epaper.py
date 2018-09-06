@@ -6,10 +6,11 @@ Developed by: Nitis Monburinon (2018)
 """
 
 import waveshare_library.epd2in7
+import os
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 # Default font
-FONT_PATH = 'FreeMonoBold.ttf'
+FONT_PATH = os.path.abspath('Arial-Unicode-Regular.ttf')
 FONT_SMALL_MAX = ImageFont.truetype(FONT_PATH, 12)
 FONT_SMALL = ImageFont.truetype(FONT_PATH, 14)
 FONT_NORMAL = ImageFont.truetype(FONT_PATH, 18)
@@ -167,7 +168,20 @@ class EPScreen():
         """
         return "\n".join(text[i:i+max_char].lstrip(' ') for i in range(0, len(text), max_char))
 
-    def print(self, text, pos=(0, 0), font="big"):
+    def font_style(self, type):
+        """
+        Return font size and max characters per line
+        :param type: pre-defined font type
+        :return: font and max_char
+        """
+        if type == "normal":
+            return (FONT_NORMAL, 24)
+        elif type == "big":
+            return (FONT_BIG, 20)
+        else:
+            return (FONT_NORMAL, 24)
+
+    def print(self, text, pos=(0, 0), type="big"):
         """
         Print a line of text with automatic new line
         :param text: Text to print
@@ -175,16 +189,17 @@ class EPScreen():
         :return:
         """
 
-        if font == "normal":
-            font, max_char = FONT_NORMAL, 24
-        elif font == "big":
-            font, max_char = FONT_BIG, 20
+        font, max_char = self.font_style(type)
 
         #  (with maximum characters of max_char)
         string = self.separate_line(text, max_char)
 
         self.draw.text(pos, string, font=font, fill=BLACK)
 
-    def show(self, path):
-
+    def open(self, path):
+        """
+        Add image to output
+        :param path:
+        :return:
+        """
         self.image_live = Image.open(path)
