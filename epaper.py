@@ -10,11 +10,11 @@ import os
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 # Default font
-FONT_PATH = os.path.abspath('Arial-Unicode-Regular.ttf')
+FONT_PATH = os.path.abspath('/home/pi/epaper/OsakaMono.ttf')
 FONT_SMALL_MAX = ImageFont.truetype(FONT_PATH, 12)
 FONT_SMALL = ImageFont.truetype(FONT_PATH, 14)
-FONT_NORMAL = ImageFont.truetype(FONT_PATH, 18)
-FONT_BIG = ImageFont.truetype(FONT_PATH, 22)
+FONT_NORMAL = ImageFont.truetype(FONT_PATH, 24)
+FONT_BIG = ImageFont.truetype(FONT_PATH, 60)
 
 # Colors
 BLACK = 0
@@ -137,8 +137,8 @@ class EPScreen():
         :return:
         """
 
-        self.draw.rectangle((0, 0, self.width, 28), fill=BLACK)
-        self.add_text_middle(5, text, FONT_NORMAL, WHITE)
+        #self.draw.rectangle((0, 0, self.width, 28), fill=BLACK)
+        self.add_text_middle(20, text, FONT_BIG, BLACK)
 
     def add_text(self, pos, text, font=FONT_NORMAL):
         """
@@ -175,13 +175,13 @@ class EPScreen():
         :return: font and max_char
         """
         if type == "normal":
-            return (FONT_NORMAL, 24)
+            return (FONT_NORMAL, 22)
         elif type == "big":
-            return (FONT_BIG, 20)
+            return (FONT_BIG, 6)
         else:
-            return (FONT_NORMAL, 24)
+            return (FONT_NORMAL, 22)
 
-    def print(self, text, pos=(0, 0), type="big"):
+    def print(self, text, pos=(0, 100), type="normal"):
         """
         Print a line of text with automatic new line
         :param text: Text to print
