@@ -1,0 +1,10 @@
+[Unit]
+Description=FindmeEpaperMqttClient
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/pi/findme-helper.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

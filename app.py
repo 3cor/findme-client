@@ -19,6 +19,7 @@ def on_message(client, obj, msg):
     t = threading.Thread(target=show_message, name="Print message", args=(message,))
     t.daemon = True
     t.start()
+    mqttc.publish(rsp_topic,message)
     print(msg.topic + " " + str(msg.qos) + " " + message)
 
 def on_publish(client, obj, mid):
@@ -29,6 +30,15 @@ def on_subscribe(client, obj, mid, granted_qos):
 
 def on_log(client, obj, level, string):
     print(string)
+
+def cache_message(title,msg):
+    with open("cache.txt","w") as f:
+        f.write(title + "####" + msg)
+
+def restore_message():
+    with open("cache.txt") as f:
+        title, msg = f.readlines().split("####")
+    return title, msg
 
 def show_message(text):
     ep = epaper.EPScreen('landscape')
@@ -55,14 +65,16 @@ hostname="m12.cloudmqtt.com"
 port=18109
 username="vplfvxvo"
 password="g9ssGd-XOM4z"
-topic = "msg"
+device_id="001"
+msg_topic="msg/request/"+device_id
+rsp_topic="msg/response/"+device_id
 
 # Connect
 mqttc.username_pw_set(username, password)
 mqttc.connect(hostname, port)
 
 # Start subscribe, with QoS level 0
-mqttc.subscribe(topic, 0)
+mqttc.subscribe([(msg_topic,0)])
 
 # Publish a message
 # mqttc.publish(topic, "Hello world")

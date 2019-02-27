@@ -10,7 +10,7 @@ import os
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 # Default font
-FONT_PATH = os.path.abspath('/home/pi/epaper/OsakaMono.ttf')
+FONT_PATH = os.path.abspath('/home/pi/findme-client/OsakaMono.ttf')
 FONT_SMALL_MAX = ImageFont.truetype(FONT_PATH, 12)
 FONT_SMALL = ImageFont.truetype(FONT_PATH, 14)
 FONT_NORMAL = ImageFont.truetype(FONT_PATH, 24)
