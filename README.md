@@ -1,68 +1,23 @@
-# ePaperLibrary for Waveshare e-Paper Raspberry HAT
+# FindMe  
 
-Simple library to use the [Waveshare 2.7inch e-Paper HAT](https://www.waveshare.com/wiki/2.7inch_e-Paper_HAT).
+FindMe is a smart status indicator system created with Raspberry Pi and E-ink display. The project started in mid-August 2018 by Nitis Monburinon. The project is named by Prof. Zabir later and has become a regular project that we show to lab visitors presented during our demonstration session.
 
-This ePaper hat is cheap compared to the PaPiRus e-Paper hat. The only problem is that this device hasn't simple library, so hello there.
+In Japan, usually, lecturers and researchers have customs to use something like whiteboard or paper to indicate their statuses in their workplaces. 
 
+These indicators tell their visitors whether the lecturers are available or not. Are lecturers at lunch or having meetings? 
 
+Are they home or working overtime? Visitors can tell by looking at indicators in front of the lecturers’ places.  
 
-**Features**:
+This system very useful in many situations and we thought we could improve its usefulness further by adding IOT and E-Ink technology to it. 
 
-- Use screen in Landscape or Portrait
-- Write simple texts
-- Add ligne
-- Not physical refresh if same image
+> Electronic ink technology produces a low-power paperlike display used primarily in early e-book readers such as Amazon's Kindle. Initial research on e-ink started at MIT's Media Lab, where the first patent was filed in 1996. 
+The rights to the proprietary technology currently are owned by the Massachusetts-based E Ink Corporation, which was acquired by Taiwanese company Prime View International in 2009. E-ink technology in early e-readers works by using tiny microcapsules that are suspended in a liquid placed within a film layer. The microcapsules, which are about the same width as human hair, contain both positively charged white particles and negatively charged black particles. Applying a negative electrical field causes the white particles to come to the surface. Conversely, applying a positive electrical field causes the black particles to come to the surface. By applying different fields at various parts of a screen, e-ink produces a text display. E-ink displays are especially popular due to their resemblance to printed paper. Besides being considered by many as easier on the eyes than other display types, e-ink also boasts lower power consumption, particularly when compared to traditional backlit liquid crystal display (LCD) screens. 
+Considering all the advantage E-ink displays provide, we adopt the technology in our FindMe project. FindMe can be deployed in front of any workplace or office. Users can use an Android mobile application to send messages to it from anywhere. 
 
+As the display only refresh once it receives messages, power consumption is low. 
 
+FindMe keeps texts on the display for a long time even when it’s not powered. This is useful when power is unavailable.
 
+The E-ink display has its own low-level library written in C. But I have developed a high-level API that easily understandable using Python. 
 
-**ToDo**:
-
-- Show the calculated image when you don't have the Hat available *Soon*
-- Add images
-
-  ​
-
-
-
-## Installation
-
-W.I.P
-
-
-
-## Usage
-
-```python
-import epsimplelib
-
-def hello():
-	esp = epsimplelib.EPScreen('landscape') # eps = e-Ink Paper Screen
-	esp.set_title("Sheldon Cooper")
-
-	esp.add_line((100, 100, 150, 100))
-	esp.update_screen()
-    
-hello()
-hello() # Physical screen not refreshed
-```
-
-
-
-## Ressources
-
-- The library uses the Original Library written by Waveshare. It can be [downloaded here](https://www.waveshare.com/wiki/File:2.7inch-e-paper-hat-code.7z). Modified to run on Python3
-- FreeMonoBold by GNU FreeFont
-
-
-
-## Author
-
-- Nicolas SAGOT - @Lyoko17220
-
-
-
-
-## Licence
-
-MIT. See [LICENCE.md](LICENCE.md)
+At the current state, English, Japanese, and Thai were tested and proved to work correctly on the display.
