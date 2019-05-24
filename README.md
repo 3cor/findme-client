@@ -21,3 +21,80 @@ FindMe keeps texts on the display for a long time even when it’s not powered. 
 The E-ink display has its own low-level library written in C. But I have developed a high-level API that easily understandable using Python. 
 
 At the current state, English, Japanese, and Thai were tested and proved to work correctly on the display.
+
+## Prerequisite
+
+Intermediate computer programming knowledge is mandatory. Others than that knowing the following subjects are highly recommended.
+* Python for microcontroller programming.
+* Java for Android application development.
+* Prior experience working with a microcontroller such as Arduino and Raspberry Pi. As well as common sensor modules.
+* Fundamental knowledge of electronic engineering. 
+* Internet of Things concept in general.
+
+The following electronic components are essential. You can find most of them scattered around the lab. If any of them is missing, you need to ask our supervisor to buy a new one or come up with alternative yourself.
+* A working, not broken, Raspberry Pi. Also, its power supply adapter.
+* A micro sd card for installing OS.
+* An E-Ink display. 
+
+## Setup
+
+### Raspberry Pi
+
+Firstly, get everything from the previous section from the lab. If any of them aren’t working, contact our supervisor ASAP. 
+
+1. Absolutely don’t power Pi during this step, for your own and device safety. Attach E-ink display directly on the Pi, as shown in the figure.
+
+2. Open the terminal, run this command to open raspberry pi configuration menu.
+
+      sudo raspi-config
+   
+   Here you need to enable SPI by selecting **Inferfacing Options** => **P4 SPI** then hit **Yes** to confirm.
+
+3. Go to $HOME directory, clone the E-ink display API repository using a command.
+
+      cd ~
+		git clone https://github.com/boonitis/findme-client.git
+
+4. Get into the cloned directory. Run install_requirement.sh to install dependencies.
+
+      cd findme-client
+      bash install_requirement.sh
+
+5. Using sudo privilage, copy  findme.service to the systemd service directoriy.
+
+      sudo cp findme.service /etc/systemd/system/
+
+6. Copy findme-helper.sh to the $HOME directory.
+   
+      cp findme-helper.sh ~
+
+7. Run the following command to setup autostart service that will run app.py as a daemon when this Pi is booted.
+   
+      sudo systemctl daemon-reload
+      sudo systemctl start findme
+      sudo systemctl enable findme
+
+8. Confirm whether the daemon (service) is working by rebooting the device and run this command.
+
+      sudo systemctl status findme
+    
+### Android Application
+
+1.	On your PC, download Android Studio and Android Debug Bridge (adb)
+	clone this repository using a command
+
+		git clone https://github.com/boonitis/find-me.git
+        
+	And then open your Android Studio **File** -> **New** -> **Import Project** then choose the cloned project folder.
+
+1. Connect your smartphone to your PC using a USB cable.
+
+2. In Android Studio, click the app module in the Project window then select Run -> Run and select [Your device name] as your deployment target.
+
+3. After the installation process, look for the FindMe app on your smartphone. Try sending a message to the Raspberry Pi.
+
+## Demonstration Guide
+
+You can let the users type a message and send to the display. When you explain how E-ink display consumes very little power consumption, try unplugging Raspberry Pi and show that E-ink display retains all the text even without electricity. I tried it, and I think it was quite impressive. 
+
+I guess that all it is for FindMe. 
