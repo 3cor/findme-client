@@ -47,39 +47,41 @@ Firstly, get everything from the previous section from the lab. If any of them a
 1. Absolutely don’t power Pi during this step, for your own and device safety. Attach E-ink display directly on the Pi, as shown in the figure.
 
 2. Open the terminal, run this command to open raspberry pi configuration menu.
-
+   ```
    sudo raspi-config
+   ```
 
    Here you need to enable SPI by selecting **Inferfacing Options** => **P4 SPI** then hit **Yes** to confirm.
 
 3. Go to \$HOME directory, clone the E-ink display API repository using a command.
-
+   ```
    cd ~
    git clone https://github.com/3cor/findme-client.git
+   ```
 
 4. Get into the cloned directory. Run install_requirement.sh to install dependencies.
-
+   ```
    cd findme-client
    bash install_requirement.sh
-
+   ```
 5. Using sudo privilage, copy findme.service to the systemd service directoriy.
-
+   ```
    sudo cp findme.service /etc/systemd/system/
-
+   ```
 6. Copy findme-helper.sh to the \$HOME directory.
-
+   ```
    cp findme-helper.sh ~
-
+   ```
 7. Run the following command to setup autostart service that will run app.py as a daemon when this Pi is booted.
-
+   ```
    sudo systemctl daemon-reload
    sudo systemctl start findme
    sudo systemctl enable findme
-
+   ```
 8. Confirm whether the daemon (service) is working by rebooting the device and run this command.
-
+   ```
    sudo systemctl status findme
-
+   ```
 ### Android Application
 
 1.  On your PC, download Android Studio and Android Debug Bridge (adb)
